@@ -25,29 +25,29 @@ namespace ClientChat
 
             if (Regex.IsMatch(textBoxIPAddress.Text, patternIPAddress))
             {
-                ((MainWindow)this.Owner).IPAddressHost = textBoxIPAddress.Text;
+                ((MainWindow)this.Owner).applicationViewModel.IPAddressHost = textBoxIPAddress.Text;
             }
             else
             {
-                textBoxIPAddress.Text = ((MainWindow)this.Owner).IPAddressHost;
+                textBoxIPAddress.Text = ((MainWindow)this.Owner).applicationViewModel.IPAddressHost;
             }
 
             if (Regex.IsMatch(textBoxPort.Text, patternPort))
             {
-                ((MainWindow)this.Owner).PortHost = Convert.ToInt32(textBoxPort.Text);
+                ((MainWindow)this.Owner).applicationViewModel.PortHost = Convert.ToInt32(textBoxPort.Text);
             }
             else
             {
-                textBoxPort.Text = ((MainWindow)this.Owner).PortHost.ToString();
+                textBoxPort.Text = ((MainWindow)this.Owner).applicationViewModel.PortHost.ToString();
             }
 
             if (!textBoxUserName.Text.Trim().ToString().Equals(""))
             {
-                ((MainWindow)this.Owner).UserName = textBoxUserName.Text;
+                ((MainWindow)this.Owner).applicationViewModel.UserName = textBoxUserName.Text;
             }
             else
             {
-                textBoxUserName.Text = ((MainWindow)this.Owner).UserName;
+                textBoxUserName.Text = ((MainWindow)this.Owner).applicationViewModel.UserName;
             }
 
            

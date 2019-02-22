@@ -37,7 +37,7 @@
 
     <DockPanel x:Name="MainContainerGrid" >
         <Menu Height="25"  Grid.ColumnSpan="2"  DockPanel.Dock="Top" >
-            <MenuItem Click="ConnectToServer_Click">
+            <MenuItem Command="{Binding ConnectToServerCommand}">
                 <MenuItem.Header >
                     <StackPanel Orientation="Horizontal">
                         <Ellipse Name="ellipseStatusConnection" Style="{DynamicResource StatusStyleConnection}"  />
@@ -48,9 +48,9 @@
             <MenuItem Header="Настройки подключения" Click="OpenSettingConnectionWindow_Click" ></MenuItem>
         </Menu>
 
-        <DockPanel DockPanel.Dock="Left" >
+        <DockPanel DockPanel.Dock="Left"  >
             <TextBlock DockPanel.Dock="Top" FontWeight="Bold" TextDecorations="Underline" Text="Участники чата" />
-            <ListBox DockPanel.Dock="Top"  Width="150"  Name="listBoxListUsers" />
+            <ListBox DockPanel.Dock="Top" ItemsSource="{Binding listUsers}"  Width="150"  Name="listBoxListUsers" />
         </DockPanel>
         
 
@@ -60,7 +60,7 @@
                 <RowDefinition Height="Auto"></RowDefinition>
             </Grid.RowDefinitions>
 
-            <ListBox Grid.Row="0" x:Name="listBoxistReciveMessage" HorizontalContentAlignment="Stretch" >
+            <ListBox Grid.Row="0" ItemsSource="{Binding listMessage}" x:Name="listBoxistReciveMessage" HorizontalContentAlignment="Stretch" >
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <TextBlock  Style="{StaticResource StyleReciveMessage}" Text="{Binding Path=Text}" HorizontalAlignment="{Binding Path=Side}" />
@@ -70,8 +70,8 @@
 
             <Border Grid.Row="1" Background="GhostWhite" VerticalAlignment="Bottom" BorderBrush="Silver" BorderThickness="3" CornerRadius="6,6,3,3">
                 <StackPanel  Orientation="Vertical">
-                    <TextBox x:Name="textBoxSendMessage" AcceptsReturn="True" Background = "SandyBrown" Height="100" TextWrapping="Wrap" AcceptsTab="True" VerticalScrollBarVisibility="Auto" MaxLength="4096" />
-                    <Button  Width="100" HorizontalAlignment="Right" Content="Отправить" Click="SendMessage_Click"/>
+                    <TextBox x:Name="textBoxSendMessage" Text="{Binding SendMessage , UpdateSourceTrigger=PropertyChanged}" AcceptsReturn="True" Background = "SandyBrown" Height="100" TextWrapping="Wrap" AcceptsTab="True" VerticalScrollBarVisibility="Auto" MaxLength="4096" />
+                    <Button  Width="100" HorizontalAlignment="Right" Content="Отправить" Command="{Binding SendMessageCommand}"/>
                 </StackPanel>
             </Border>
         </Grid>

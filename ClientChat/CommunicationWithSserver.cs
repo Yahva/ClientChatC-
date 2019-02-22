@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
-using System.Windows.Media;
 
 namespace ClientChat
 {
@@ -17,9 +13,9 @@ namespace ClientChat
         public TcpClient client;
         private NetworkStream _stream;
         private Thread _receiveThread;
-        private MainWindow _mainWindow;
+        private ApplicationViewModel _mainWindow;
 
-        public CommunicationWithSserver(string userName, IPEndPoint ipPointHost, MainWindow mainWindow)
+        public CommunicationWithSserver(string userName, IPEndPoint ipPointHost, ApplicationViewModel mainWindow)
         {
             _userName = userName;
             _mainWindow = mainWindow;
@@ -93,13 +89,6 @@ namespace ClientChat
             {
                 byte[] data = Encoding.Unicode.GetBytes(message);
                 _stream.Write(data, 0, data.Length);
-
-                if (_mainWindow != null)
-                {
-                    _mainWindow.SendToListReciveMessage(message, true);
-                    _mainWindow.textBoxSendMessage.Clear();
-                }
-                   
             }
             catch (Exception ex)
             {
