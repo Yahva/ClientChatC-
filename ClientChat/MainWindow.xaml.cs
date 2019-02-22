@@ -22,12 +22,16 @@ namespace ClientChat
         public int PortHost = 5555;
         public string UserName = "User";
         private ObservableCollection<string> listUsers;
+        private ObservableCollection<Message> listMessage;
         public MainWindow()
         {
             InitializeComponent();
 
             listUsers = new ObservableCollection<string>();
             listBoxListUsers.ItemsSource = listUsers;
+
+            listMessage = new ObservableCollection<Message>();
+            listBoxistReciveMessage.ItemsSource = listMessage;
         }
 
         private void ConnectToServer_Click(object sender, RoutedEventArgs e)
@@ -77,20 +81,21 @@ namespace ClientChat
                 // Получить диспетчер от текущего окна и использовать его для вызова кода обновления
               this.Dispatcher.BeginInvoke(DispatcherPriority.Normal,(ThreadStart)delegate ()
                 {
-                    TextBlock textBlock = new TextBlock();
-                    textBlock.Text = message;
+                    Message messageObject = new Message();
+                    messageObject.Text = message;
 
-                    if (iSentIt) textBlock.Style = (Style)this.TryFindResource("StyleSendMessage");
+                    if (iSentIt) messageObject.Side = "Right";
                     else
                     {
-                        textBlock.Style = (Style)this.TryFindResource("StyleReciveMessage");
+                        messageObject.Side = "Left";
+
                         if (message.StartsWith("++ "))
                             listUsers.Add( message.Substring(3,message.IndexOf(":") - 3));
                         else if (message.StartsWith("-- "))
                             listUsers.Remove(message.Substring(3, message.IndexOf(":") - 3));
-                    } 
+                    }
 
-                    spListReciveMessage.Children.Add(textBlock);
+                    listMessage.Add(messageObject);
                 }
             );
            
@@ -110,6 +115,13 @@ namespace ClientChat
             SettingConnectionWindow settingConnectionWindow = new SettingConnectionWindow(IPAddressHost, PortHost, UserName);
             settingConnectionWindow.Owner = this;
             settingConnectionWindow.Show();
+        }
+
+        public class Message
+        {
+            public string Name { get; set; } 
+            public string Text { get; set; } 
+            public string Side { get; set; } 
         }
     }
 }

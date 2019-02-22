@@ -15,9 +15,8 @@
             <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
             <Setter Property="TextBlock.Margin" Value="5 3 5 3" />
             <Setter Property="TextBlock.Padding" Value="5 3 5 3" />
-            <Setter Property="TextBlock.HorizontalAlignment" Value="Left" />
-
         </Style>
+        
         <Style x:Key="StyleSendMessage">
             <Setter Property="TextBlock.FontFamily" Value="Verdana" />
             <Setter Property="TextBlock.Background" Value="Tomato" />
@@ -60,9 +59,15 @@
                 <RowDefinition ></RowDefinition>
                 <RowDefinition Height="Auto"></RowDefinition>
             </Grid.RowDefinitions>
-            <ScrollViewer  Grid.Row="0" VerticalScrollBarVisibility="Auto" VerticalAlignment="Top">
-                <StackPanel x:Name="spListReciveMessage" Orientation="Vertical" />
-            </ScrollViewer>
+
+            <ListBox Grid.Row="0" x:Name="listBoxistReciveMessage" HorizontalContentAlignment="Stretch" >
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock  Style="{StaticResource StyleReciveMessage}" Text="{Binding Path=Text}" HorizontalAlignment="{Binding Path=Side}" />
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+
             <Border Grid.Row="1" Background="GhostWhite" VerticalAlignment="Bottom" BorderBrush="Silver" BorderThickness="3" CornerRadius="6,6,3,3">
                 <StackPanel  Orientation="Vertical">
                     <TextBox x:Name="textBoxSendMessage" AcceptsReturn="True" Background = "SandyBrown" Height="100" TextWrapping="Wrap" AcceptsTab="True" VerticalScrollBarVisibility="Auto" MaxLength="4096" />
