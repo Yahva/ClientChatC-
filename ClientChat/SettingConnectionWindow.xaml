@@ -1,0 +1,46 @@
+﻿<Window x:Class="ClientChat.SettingConnectionWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ClientChat"
+        mc:Ignorable="d"
+        Title="SettingConnectionWindow" Height="200" Width="300" ResizeMode="NoResize">
+    <DockPanel LastChildFill="True">
+        <GroupBox DockPanel.Dock="Top" Header="Параметры сети" Padding="5">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                
+                <TextBlock Grid.Column="0" Grid.Row="0">IP-адрес:</TextBlock>
+                <TextBox Grid.Column="1" Grid.Row="0" MaxLength="15" Name="textBoxIPAddress">0</TextBox>
+
+                <TextBlock Grid.Column="0" Grid.Row="1" >Порт:</TextBlock>
+                <TextBox Grid.Column="1" Grid.Row="1" MaxLength="5" Name="textBoxPort">0</TextBox>
+            </Grid>
+        </GroupBox>
+        <GroupBox DockPanel.Dock="Top" Header="Пользователь" Padding="5">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions >
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Column="0" Grid.Row="0" >Имя:</TextBlock>
+                <TextBox Grid.Column="1" Grid.Row="0" MaxLength="15" Name="textBoxUserName">User</TextBox>
+            </Grid>
+        </GroupBox>
+        <Button Grid.Column="0" Grid.Row="0" Content="Сохранить" Click="SaveConnectionInfo_Click"  />
+    </DockPanel>
+</Window>

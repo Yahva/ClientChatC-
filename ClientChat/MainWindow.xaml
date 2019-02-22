@@ -1,0 +1,74 @@
+﻿<Window x:Class="ClientChat.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ClientChat"
+        mc:Ignorable="d"
+        Title="ClientChat" MinHeight="400" MinWidth="800" Closing="ClosingProgram">
+
+    <Window.Resources>
+        <Style x:Key="StyleReciveMessage">
+            <Setter Property="TextBlock.FontFamily" Value="Verdana" />
+            <Setter Property="TextBlock.Background" Value="Blue" />
+            <Setter Property="TextBlock.Foreground" Value="White" />
+            <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+            <Setter Property="TextBlock.Margin" Value="5 3 5 3" />
+            <Setter Property="TextBlock.Padding" Value="5 3 5 3" />
+            <Setter Property="TextBlock.HorizontalAlignment" Value="Left" />
+
+        </Style>
+        <Style x:Key="StyleSendMessage">
+            <Setter Property="TextBlock.FontFamily" Value="Verdana" />
+            <Setter Property="TextBlock.Background" Value="Tomato" />
+            <Setter Property="TextBlock.Foreground" Value="White" />
+            <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+            <Setter Property="TextBlock.Margin" Value="5 3 5 3" />
+            <Setter Property="TextBlock.Padding" Value="5 3 5 3" />
+            <Setter Property="TextBlock.HorizontalAlignment" Value="Right" />
+        </Style>
+
+        <Style x:Key="StatusStyleConnection">
+            <Setter Property="Ellipse.Width" Value="10" />
+            <Setter Property="Ellipse.Height" Value="10" />
+            <Setter Property="Ellipse.Margin" Value="0 0 5 0" />
+            <Setter Property="Ellipse.Fill" Value="Red" />
+        </Style>
+    </Window.Resources>
+
+    <DockPanel x:Name="MainContainerGrid" >
+        <Menu Height="25"  Grid.ColumnSpan="2"  DockPanel.Dock="Top" >
+            <MenuItem Click="ConnectToServer_Click">
+                <MenuItem.Header >
+                    <StackPanel Orientation="Horizontal">
+                        <Ellipse Name="ellipseStatusConnection" Style="{DynamicResource StatusStyleConnection}"  />
+                        <TextBlock>Подключиться</TextBlock>
+                    </StackPanel>
+                </MenuItem.Header>
+            </MenuItem>
+            <MenuItem Header="Настройки подключения" Click="OpenSettingConnectionWindow_Click" ></MenuItem>
+        </Menu>
+
+        <DockPanel DockPanel.Dock="Left" >
+            <TextBlock DockPanel.Dock="Top" FontWeight="Bold" TextDecorations="Underline" Text="Участники чата" />
+            <ListBox DockPanel.Dock="Top"  Width="150"  Name="listBoxListUsers" />
+        </DockPanel>
+        
+
+        <Grid DockPanel.Dock="Left">
+            <Grid.RowDefinitions>
+                <RowDefinition ></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+            </Grid.RowDefinitions>
+            <ScrollViewer  Grid.Row="0" VerticalScrollBarVisibility="Auto" VerticalAlignment="Top">
+                <StackPanel x:Name="spListReciveMessage" Orientation="Vertical" />
+            </ScrollViewer>
+            <Border Grid.Row="1" Background="GhostWhite" VerticalAlignment="Bottom" BorderBrush="Silver" BorderThickness="3" CornerRadius="6,6,3,3">
+                <StackPanel  Orientation="Vertical">
+                    <TextBox x:Name="textBoxSendMessage" AcceptsReturn="True" Background = "SandyBrown" Height="100" TextWrapping="Wrap" AcceptsTab="True" VerticalScrollBarVisibility="Auto" MaxLength="4096" />
+                    <Button  Width="100" HorizontalAlignment="Right" Content="Отправить" Click="SendMessage_Click"/>
+                </StackPanel>
+            </Border>
+        </Grid>
+    </DockPanel>
+</Window>
